@@ -54,7 +54,14 @@ jobs:
       - name: Ensure reports directory exists
         run: mkdir -p cypress/reports/mochawesome
 
-      - name: Merge reports
+      - name: Validate mochawesome.json
+        run: |
+          if [ ! -s cypress/reports/mochawesome/mochawesome.json ]; then
+            echo "{}" > cypress/reports/mochawesome/mochawesome.json
+          else
+            cat cypress/reports/mochawesome/mochawesome.json | jq empty || echo "{}" > cypress/reports/mochawesome/mochawesome.json
+
+      - name: Merge reports with validation
         run: |
           if ! npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/report.json; then
             echo "Failed to merge reports. Creating an empty report."
