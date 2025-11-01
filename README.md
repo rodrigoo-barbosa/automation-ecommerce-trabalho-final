@@ -76,7 +76,46 @@ npx cypress open --e2e
 
 ---
 
-## 💡 Dica: Script npm (opcional)
+## � Relatórios (mochawesome)
+
+O projeto inclui suporte para geração de relatórios com o reporter mochawesome. O fluxo gera arquivos JSON por spec, mescla-os e produz um relatório HTML legível.
+
+Como gerar localmente:
+
+1. Instale dependências (se ainda não instalou):
+
+```bash
+npm install
+# ou, se tiver package-lock.json
+npm ci
+```
+
+2. Rode o comando de relatório (script disponível em `package.json`):
+
+```bash
+npm run cypress:report
+```
+
+3. Abra o relatório gerado:
+
+```
+# Windows (PowerShell)
+Start-Process "cypress/reports/mochawesome/report.html"
+
+# Linux
+xdg-open cypress/reports/mochawesome/report.html
+
+# macOS
+open cypress/reports/mochawesome/report.html
+```
+
+Notas:
+- O HTML final fica em `cypress/reports/mochawesome/report.html`.
+- Recomendamos usar Node.js v20+ localmente por compatibilidade com dependências (ex.: `@faker-js/faker@10`).
+- No CI, o workflow já faz upload dos artefatos (`cypress/reports`) para download a partir da execução no GitHub Actions.
+
+
+## �💡 Dica: Script npm (opcional)
 
 Adicione ao seu `package.json`:
 
