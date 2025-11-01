@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-01T23:03:33.973Z",
+    "end": "2025-11-01T23:03:55.058Z",
+    "duration": 21085,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "f750f514-804f-495c-91df-3626dff59b5a",
+      "title": "",
+      "fullFile": "cypress\\e2e\\modules\\02-login\\logout.cy.js",
+      "file": "cypress\\e2e\\modules\\02-login\\logout.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "93a5ae65-2ac6-4901-9b5d-8d4157902871",
+          "title": "Login Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve realizar logout do usuário e retornar para página inicial",
+              "fullTitle": "Login Page Deve realizar logout do usuário e retornar para página inicial",
+              "timedOut": null,
+              "duration": 16672,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const user = registerNewUser();\ncy.get('a[href=\"/logout\"]').should('be.visible').click();\ncy.contains('Login to your account').should('be.visible');",
+              "err": {},
+              "uuid": "386a93af-8e2d-4025-a52c-7caa62e15f80",
+              "parentUUID": "93a5ae65-2ac6-4901-9b5d-8d4157902871",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "386a93af-8e2d-4025-a52c-7caa62e15f80"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 16672,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

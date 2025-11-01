@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
         run: |
@@ -30,15 +30,15 @@ jobs:
             npm install --no-audit --progress=false
           fi
 
-      - name: Run Cypress tests
+      - name: Run Cypress tests and generate reports
         uses: cypress-io/github-action@v5
         with:
-          # runs `npx cypress run --spec "cypress/e2e/**/*.cy.js"`
-          command: npx cypress run --spec cypress/e2e/**/*.cy.js
+          # run the npm script which executes Cypress with mochawesome reporter and generates HTML
+          command: npm run cypress:report
         env:
           CI: true
 
-      - name: Upload test artifacts (screenshots & videos)
+      - name: Upload test artifacts (screenshots, videos & reports)
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -46,3 +46,4 @@ jobs:
           path: |
             cypress/screenshots
             cypress/videos
+            cypress/reports

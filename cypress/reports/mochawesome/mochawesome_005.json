@@ -1,0 +1,124 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-01T22:30:07.286Z",
+    "end": "2025-11-01T22:30:23.807Z",
+    "duration": 16521,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "91dfc4b7-0e6a-4999-a6ff-c3e1401eee06",
+      "title": "",
+      "fullFile": "cypress\\e2e\\modules\\04-busca-produto\\Verify all products and product detail page.cy.js",
+      "file": "cypress\\e2e\\modules\\04-busca-produto\\Verify all products and product detail page.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "5dc0fa2e-fb45-4d51-82da-4ae43d3b9eb9",
+          "title": "Products Page",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve verificar todos os produtos e seus detalhes",
+              "fullTitle": "Products Page Deve verificar todos os produtos e seus detalhes",
+              "timedOut": null,
+              "duration": 7479,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('a[href=\"/products\"]').click();\ncy.url().should('include', '/products');\ncy.contains(/All Products|ALL PRODUCTS/i).should('be.visible');\n//Importa a lista de produtos da folder fixture\ncy.fixture('products-list').then(expectedProducts => {\n  cy.get('div.features_items').within(() => {\n    expectedProducts.forEach(name => {\n      cy.contains(name, {\n        matchCase: false\n      }).should('be.visible');\n    });\n  });\n  cy.get('a[href=\"/product_details/1\"]').click();\n  cy.location('pathname').should('eq', '/product_details/1');\n  cy.contains('Blue Top').should('be.visible');\n  cy.contains('Category').should('be.visible');\n  cy.contains('Availability').should('be.visible');\n  cy.contains('Condition').should('be.visible');\n  cy.contains('Brand').should('be.visible');\n  cy.contains('Quantity').should('be.visible');\n});",
+              "err": {},
+              "uuid": "2d611f57-aad3-45e1-9c5d-3ffaea2ee947",
+              "parentUUID": "5dc0fa2e-fb45-4d51-82da-4ae43d3b9eb9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve realizar a busca de um produto",
+              "fullTitle": "Products Page Deve realizar a busca de um produto",
+              "timedOut": null,
+              "duration": 6485,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('a[href=\"/products\"]').click();\ncy.url().should('include', '/products');\ncy.contains(/All Products|ALL PRODUCTS/i).should('be.visible');\ncy.fixture('products-list').then(products => {\n  const product = products[Math.floor(Math.random() * products.length)];\n  cy.get('#search_product').clear().type(product);\n  cy.get('#submit_search').click();\n  cy.contains(product, {\n    matchCase: false\n  }).should('be.visible');\n});",
+              "err": {},
+              "uuid": "131864f3-0eb3-412c-9d32-ba2935bdf921",
+              "parentUUID": "5dc0fa2e-fb45-4d51-82da-4ae43d3b9eb9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "2d611f57-aad3-45e1-9c5d-3ffaea2ee947",
+            "131864f3-0eb3-412c-9d32-ba2935bdf921"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 13964,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

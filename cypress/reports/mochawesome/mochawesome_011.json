@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-01T23:03:59.532Z",
+    "end": "2025-11-01T23:04:34.799Z",
+    "duration": 35267,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "656e72a4-5809-45ee-9750-ecf72c2fd530",
+      "title": "",
+      "fullFile": "cypress\\e2e\\modules\\05-checkout-produto\\Place-order-register-before-checkout.cy.js",
+      "file": "cypress\\e2e\\modules\\05-checkout-produto\\Place-order-register-before-checkout.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "522ddeab-92b0-4aa2-aa80-3e3319c102c9",
+          "title": "Page Checkout flow - register before checkout",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve realizar checkout de produto e deletar conta do usuário",
+              "fullTitle": "Page Checkout flow - register before checkout Deve realizar checkout de produto e deletar conta do usuário",
+              "timedOut": null,
+              "duration": 30293,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const timestamp = new Date().getTime();\nconst mail = `test${timestamp}@email.com`;\nconst password = _faker.faker.internet.password();\nconst fullName = _faker.faker.person.fullName();\ncy.get('a[href=\"/login\"]').click();\ncy.contains('New User Signup!').should('be.visible');\ncy.get('input[data-qa=\"signup-name\"]').type(fullName);\ncy.get('input[data-qa=\"signup-email\"]').type(mail);\ncy.get('[data-qa=\"signup-button\"]').click();\ncy.contains('Enter Account Information').should('be.visible');\ncy.get('input[type=\"radio\"]').first().check();\ncy.get('input[data-qa=\"name\"]').clear().type(fullName);\ncy.get('input[data-qa=\"password\"]').type(password);\ncy.get('select[data-qa=\"days\"]').select(_faker.faker.number.int({\n  min: 1,\n  max: 28\n}).toString());\ncy.get('select[data-qa=\"months\"]').select(_faker.faker.date.month());\ncy.get('select[data-qa=\"years\"]').select(_faker.faker.date.birthdate({\n  min: 18,\n  max: 80,\n  mode: 'age'\n}).getFullYear().toString());\ncy.get('input[id=\"newsletter\"]').check();\ncy.get('input[id=\"optin\"]').check();\ncy.get('input[data-qa=\"first_name\"]').type(_faker.faker.person.firstName());\ncy.get('input[data-qa=\"last_name\"]').type(_faker.faker.person.lastName());\ncy.get('input[data-qa=\"company\"]').type(_faker.faker.company.name());\ncy.get('input[data-qa=\"address\"]').type(_faker.faker.location.streetAddress());\ncy.get('input[data-qa=\"address2\"]').type(_faker.faker.location.secondaryAddress());\ncy.get('select[data-qa=\"country\"]').select('Canada');\ncy.get('input[data-qa=\"state\"]').type(_faker.faker.location.state());\ncy.get('input[data-qa=\"city\"]').type(_faker.faker.location.city());\ncy.get('input[data-qa=\"zipcode\"]').type(_faker.faker.location.zipCode());\ncy.get('input[data-qa=\"mobile_number\"]').type(_faker.faker.phone.number());\ncy.get('button[data-qa=\"create-account\"]').click();\ncy.contains(/Account Created!/i).should('be.visible');\ncy.contains('Continue').click();\ncy.contains(new RegExp(`Logged in as ${fullName.split(' ')[0]}`, 'i')).should('be.visible');\ncy.get('a[href=\"/products\"]').click();\ncy.url().should('include', '/products');\ncy.contains('Add to cart').first().click({\n  force: true\n});\ncy.contains(/View Cart|Continue/).contains('View Cart').click({\n  force: true\n}).then(() => {});\ncy.location('pathname').should('include', '/view_cart');\ncy.contains(/Shopping Cart|Cart/i).should('be.visible');\ncy.contains('Proceed To Checkout').click({\n  force: true\n});\ncy.contains(/Address Details|ADDRESS DETAILS/i).should('be.visible');\ncy.contains(/Review Your Order|REVIEW ORDER/i).should('be.visible');\n// tenta obter elementos <textarea> cujo atributo name seja \"message\"\ncy.get('textarea[name=\"message\"]').then($t => {\n  if ($t.length) {\n    cy.get('textarea[name=\"message\"]').type('Entregar na portaria do Prédio');\n  } else {\n    cy.get('textarea').first().type('Entregar na portaria do Prédio');\n  }\n});\ncy.contains('Place Order').click({\n  force: true\n});\ncy.get('input[name=\"name_on_card\"]').type(fullName);\ncy.get('input[name=\"card_number\"]').type('4242424242424242');\ncy.get('input[name=\"cvc\"]').type('123');\ncy.get('input[name=\"expiry_month\"]').type('12');\ncy.get('input[name=\"expiry_year\"]').type('2028');\ncy.contains(/Pay and Confirm Order|Pay & Confirm Order|Pay and Confirm/).click({\n  force: true\n});\ncy.contains(/Congratulations! Your order has been confirmed!/i, {\n  timeout: 10000\n}).should('be.visible');\ncy.get('a[href=\"/delete_account\"]').click({\n  force: true\n});\ncy.contains(/Account Deleted!|ACCOUNT DELETED!/i).should('be.visible');\ncy.contains('Continue').click({\n  force: true\n});",
+              "err": {},
+              "uuid": "1f5541a3-3279-4565-8ee1-1b4807179acc",
+              "parentUUID": "522ddeab-92b0-4aa2-aa80-3e3319c102c9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "1f5541a3-3279-4565-8ee1-1b4807179acc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 30293,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
