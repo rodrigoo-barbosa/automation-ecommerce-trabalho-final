@@ -33,11 +33,14 @@ jobs:
       - name: Clean old mochawesome reports
         run: rm -f cypress/reports/mochawesome/*.json
 
-      - name: Run Cypress tests and generate reports
-        uses: cypress-io/github-action@v5
-        with:
-          # run the npm script which executes Cypress with mochawesome reporter and generates HTML
-          command: npm run cypress:report
+      - name: Verify Node.js and Cypress versions
+        run: |
+          echo "Node.js version:" && node -v
+          echo "NPM version:" && npm -v
+          echo "Cypress version:" && npx cypress --version
+
+      - name: Run Cypress tests and generate reports with verbose logging
+        run: npm run cypress:report --verbose
         env:
           CI: true
 
