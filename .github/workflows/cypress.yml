@@ -1,4 +1,4 @@
-name: CI - Automaçõ de testes E2E desenvolvida com Cypress para o site Automation Exercise
+name: CI - Automação de testes E2E desenvolvida com Cypress para o site Automation Exercise
 
 on:
   push:
@@ -30,9 +30,6 @@ jobs:
             npm install --no-audit --progress=false
           fi
 
-      - name: Clean old mochawesome reports
-        run: rm -f cypress/reports/mochawesome/*.json
-
       - name: Verify Node.js and Cypress versions
         run: |
           echo "Node.js version:" && node -v
@@ -44,7 +41,7 @@ jobs:
         with:
           command: npx cypress run
 
-      - name: Upload test artifacts (screenshots, videos & reports)
+      - name: Upload test artifacts (screenshots and videos)
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -52,24 +49,3 @@ jobs:
           path: |
             cypress/screenshots
             cypress/videos
-            cypress/reports
-
-      - name: Debug mochawesome.json
-        run: cat cypress/reports/mochawesome/mochawesome.json || echo "File not found or empty"
-
-      - name: Ensure reports directory exists
-        run: mkdir -p cypress/reports/mochawesome
-
-      - name: Validate mochawesome.json
-        run: |
-          if [ ! -s cypress/reports/mochawesome/mochawesome.json ]; then
-            echo "{}" > cypress/reports/mochawesome/mochawesome.json
-          else
-            cat cypress/reports/mochawesome/mochawesome.json | jq empty || echo "{}" > cypress/reports/mochawesome/mochawesome.json
-
-      - name: Merge reports with validation
-        run: |
-          if ! npx mochawesome-merge cypress/reports/mochawesome/*.json > cypress/reports/mochawesome/report.json; then
-            echo "Failed to merge reports. Creating an empty report."
-            echo '{}' > cypress/reports/mochawesome/report.json
-          fi
