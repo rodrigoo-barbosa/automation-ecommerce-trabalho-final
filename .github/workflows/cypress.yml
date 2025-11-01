@@ -30,6 +30,9 @@ jobs:
             npm install --no-audit --progress=false
           fi
 
+      - name: Clean old mochawesome reports
+        run: rm -f cypress/reports/mochawesome/*.json
+
       - name: Run Cypress tests and generate reports
         uses: cypress-io/github-action@v5
         with:
