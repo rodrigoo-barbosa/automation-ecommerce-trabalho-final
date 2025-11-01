@@ -1,0 +1,48 @@
+name: CI - Automaçõ de testes E2E desenvolvida com Cypress para o site Automation Exercise
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  cypress-run:
+    name: Run Cypress tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          # Prefer a CI-safe install; fallback to npm install if no lockfile
+          if [ -f package-lock.json ]; then
+            npm ci --prefer-offline --no-audit --progress=false
+          else
+            npm install --no-audit --progress=false
+          fi
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          # runs `npx cypress run --spec "cypress/e2e/**/*.cy.js"`
+          command: npx cypress run --spec "cypress/e2e/**/*.cy.js"
+        env:
+          CI: true
+
+      - name: Upload test artifacts (screenshots & videos)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/screenshots
+            cypress/videos
