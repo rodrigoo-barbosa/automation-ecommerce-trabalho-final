@@ -39,10 +39,10 @@ jobs:
           echo "NPM version:" && npm -v
           echo "Cypress version:" && npx cypress --version
 
-      - name: Run Cypress tests and generate reports with verbose logging
-        run: npm run cypress:report --verbose
-        env:
-          CI: true
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npx cypress run
 
       - name: Upload test artifacts (screenshots, videos & reports)
         if: always()
