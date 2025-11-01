@@ -1,0 +1,32 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+
+# Environment
+.env
+.env.*
+
+# Cypress
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Coverage
+coverage/
+
+# Misc
+.cache/
